@@ -10,7 +10,7 @@
 
 　　感知机的数学模型是：
 
-　　　　
+　　　　![](https://wikimedia.org/api/rest_v1/media/math/render/svg/4e1ed056a43771fc10b5222c5c49b4d853e3b174)
 
 　　x是代表实例特征的一维数组
 
