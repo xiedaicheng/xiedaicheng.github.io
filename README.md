@@ -1,1 +1,1 @@
-[感知机](https://github.com/xiedaicheng/xiedaicheng.github.io/master/perceptron.md) 
+[感知机](https://github.com/xiedaicheng/xiedaicheng.github.io/blob/master/perceptron.md) 
