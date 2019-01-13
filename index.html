@@ -159,17 +159,51 @@
 <p>　　数学模型</p>
 <p>　　感知机的数学模型是：</p>
 <p>　　　　<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/4e1ed056a43771fc10b5222c5c49b4d853e3b174" alt=""></p>
-<p>　　x是代表实例特征的一维数组</p>
-<p>　　w是代表每个特征权重的一维数组</p>
-<p>　　 是两个数组的点积</p>
+<p>　　x是代表实例特征的一维数组<img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;[x_{1},x_{2},...,x_{n}]" alt=""></p>
+<p>　　w是代表每个特征权重的一维数组<img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;[w_{1},w_{2},...,w_{n}]" alt=""></p>
+<p>　　 <img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;w\cdot&amp;space;x" alt="">是两个数组的<a href="https://zh.wikipedia.org/wiki/%E7%82%B9%E7%A7%AF" target="_blank" rel="noopener">点积</a><br><img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;\sum_{i=1}^{n}&amp;space;w_{i}x_{i}&amp;space;=&amp;space;w_{1}x_{1}+w_{2}x_{2}+...+w_{n}x_{n}" alt=""></p>
 <p>　　b是一个代表偏置的常数</p>
-<p>　　当时，感知机输出1，代表结果为true，神经元被激活；否则输出0，代表结果为false，神经元未被激活。 </p>
-<p>　　几何含义： 这一超平面，把空间分隔成两部分</p>
+<p>　　当<img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;w\cdot&amp;space;x+b&gt;0" alt="">时，感知机输出1，代表结果为true，神经元被激活；否则输出0，代表结果为false，神经元未被激活。 </p>
+<p>　　几何含义： <img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;w\cdot&amp;space;x+b=0" alt="">这一超平面，把空间分隔成两部分</p>
 <p> 　　应用示例</p>
-<p>　　用感知机来实现并运算：取,,, 对于以下输入通过感知机计算得出y值和并运算真值表的相同，这样我们就通过感知机模拟了一个并运算函数。</p>
-<p> 1    0     0<br> 0    1    0<br> 0    0     0<br> 1    1    1</p>
-<p> 　　下图展示了真值表的坐标，和一条代表感知机的直线。</p>
-<p>　　</p>
+<p>　　用感知机来实现并运算：取<img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;w_{1}&amp;space;=&amp;space;1" alt="">,<img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;w_{2}&amp;space;=&amp;space;1" alt="">,<img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;b&amp;space;=&amp;space;1.5" alt="">, 对于以下输入通过感知机计算得出y值和并运算真值表的相同，这样我们就通过感知机模拟了一个并运算函数。</p>
+<table>
+<thead>
+<tr>
+<th><img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;x_{1}" alt=""></th>
+<th><img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;x_{2}" alt=""></th>
+<th><img src="https://latex.codecogs.com/gif.latex?\inline&amp;space;y" alt=""></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> 1</td>
+<td>0</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td> 0</td>
+<td>1</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td> 0</td>
+<td>0</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td> 1</td>
+<td>1</td>
+<td>1</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p> 　　下图展示了真值表的坐标，和一条代表感知机的直线。<br><img src="https://img2018.cnblogs.com/blog/641139/201901/641139-20190103205733725-1433351409.png" alt="">
+　　</p>
 <p>　　能正确分类的直线有无数条。w和b也有无数种正确的取值。</p>
 <p>　　并运算只有四个样本，两个特征，是一个最简单的例子。通常我们要处理的问题有更多样本，更多特征。</p>
 <p>　　感知器可以拟合任何的线性函数，可以用来解决任何线性分类。但是解决不了线性不可分的问题，对于线性不可分问题，需要通过多个感知机组成的网络来处理。</p>
@@ -177,12 +211,11 @@
 <p>　　使用给定样本，寻找权重w和偏置b的过程，叫做训练</p>
 <p>　　训练算法：</p>
 <p>　　　　设置w和b默认值为0，然后不断迭代更新，直到能正确分类所有样本</p>
-<p>　　</p>
-<p>　　</p>
+<p>　　<img src="https://latex.codecogs.com/gif.latex?w_{i}\leftarrow&amp;space;w_{i}+\bigtriangleup&amp;space;w_{i}" alt=""></p>
+<p>　　<img src="https://latex.codecogs.com/gif.latex?b\leftarrow&amp;space;b+\bigtriangleup&amp;space;b" alt=""></p>
 <p>　　其中</p>
-<p>　　</p>
-<p>　　</p>
-<p>　　t代表训练样本的实际值，被称为label，y代表使用当前参数感知机的输出值，代表学习率，是一个需要手工设定的超参数。</p>
+<p>　　<br><img src="https://latex.codecogs.com/gif.latex?\bigtriangleup&amp;space;w&amp;space;=&amp;space;\eta&amp;space;(t-y" alt="">x_{i})<br>　　<br><img src="https://latex.codecogs.com/gif.latex?\bigtriangleup&amp;space;b&amp;space;=&amp;space;\eta&amp;space;(t-y" alt="">)</p>
+<p>　　t代表训练样本的实际值，被称为label，y代表使用当前参数感知机的输出值，<img src="https://latex.codecogs.com/gif.latex?\eta" alt="">代表学习率，是一个需要手工设定的超参数。</p>
 <p>　　下面的代码定义了一个包含训练方法的感知机类型。</p>
 <pre><code>class Perceptron(object):
     def __init__(self, input_num, activator):
