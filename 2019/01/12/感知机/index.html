@@ -30,10 +30,10 @@
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/641139/201901/641139-20190103205733725-1433351409.png">
 <meta property="og:image" content="https://latex.codecogs.com/gif.latex?\inline&space;w_{i}\leftarrow&space;w_{i}+\bigtriangleup&space;w_{i}">
 <meta property="og:image" content="https://latex.codecogs.com/gif.latex?\inline&space;b\leftarrow&space;b+\bigtriangleup&space;b">
-<meta property="og:image" content="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;w_{i}=(t-y">
-<meta property="og:image" content="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;b=\eta&space;(t-y">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;w_{i}=%28t-y%29x_{i}">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;b=\eta&space;%28t-y%29">
 <meta property="og:image" content="https://latex.codecogs.com/gif.latex?\inline&space;\eta">
-<meta property="og:updated_time" content="2019-01-14T14:59:06.307Z">
+<meta property="og:updated_time" content="2019-01-14T15:54:17.606Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="感知机">
 <meta name="twitter:description" content="概念 　　感知机是一种二元线性分类器。输入一组代表实例特征的向量，感知机可以计算出实例的类别。 　　二元分类指的是感知机输出的结果只有两类，代表是或否。实际应用中，一些问题要求的输出就是是或否，比如根据照片识别性别，识别图片中是否存在某种物品，根据X光片判断是否患病，判断邮件是否是垃圾邮件等等。 　　多个是或否的判断嵌套叠加起来，就可以处理复杂的逻辑，也可以输出多元分类。所以，使用多个类似感知">
@@ -168,7 +168,7 @@
 <p>　　<img src="https://latex.codecogs.com/gif.latex?\inline&space;w_{i}\leftarrow&amp;space;w_{i}+\bigtriangleup&amp;space;w_{i}" alt=""></p>
 <p>　　<img src="https://latex.codecogs.com/gif.latex?\inline&space;b\leftarrow&amp;space;b+\bigtriangleup&amp;space;b" alt=""></p>
 <p>　　其中</p>
-<p>　　<br><img src="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;w_{i}=(t-y" alt="">x_{i})<br>　　<br><img src="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;b=\eta&space;(t-y" alt="">)</p>
+<p>　　<br><img src="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;w_{i}=%28t-y%29x_{i}" alt=""><br>　　<br><img src="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;b=\eta&space;%28t-y%29" alt=""></p>
 <p>　　t代表训练样本的实际值，被称为label，y代表使用当前参数感知机的输出值，<img src="https://latex.codecogs.com/gif.latex?\inline&space;\eta" alt="">代表学习率，是一个需要手工设定的超参数。</p>
 <p>　　下面的代码定义了一个包含训练方法的感知机类型。</p>
 <pre><code>class Perceptron(object):
