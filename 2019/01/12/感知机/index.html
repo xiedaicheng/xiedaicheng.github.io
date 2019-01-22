@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;w_{i}=%28t-y%29x_{i}">
 <meta property="og:image" content="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;b=\eta&space;%28t-y%29">
 <meta property="og:image" content="https://latex.codecogs.com/gif.latex?\inline&space;\eta">
-<meta property="og:updated_time" content="2019-01-20T13:45:00.438Z">
+<meta property="og:updated_time" content="2019-01-22T14:25:34.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="感知机">
 <meta name="twitter:description" content="概念 　　感知机是一种二元线性分类器。输入一组代表实例特征的向量，感知机可以计算出实例的类别。 　　二元分类指的是感知机输出的结果只有两类，代表是或否。实际应用中，一些问题要求的输出就是是或否，比如根据照片识别性别，识别图片中是否存在某种物品，根据X光片判断是否患病，判断邮件是否是垃圾邮件等等。 　　多个是或否的判断嵌套叠加起来，就可以处理复杂的逻辑，也可以输出多元分类。所以，使用多个类似感知">
@@ -182,7 +182,8 @@ var _hmt = _hmt || [];
 <p>　　<br><img style="display: inline;" src="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;w_{i}=%28t-y%29x_{i}"><br>　　<br><img style="display: inline;" src="https://latex.codecogs.com/gif.latex?\inline&space;\Delta&space;b=\eta&space;%28t-y%29"></p>
 <p>　　t代表训练样本的实际值，被称为label，y代表使用当前参数感知机的输出值，<img style="display: inline;" src="https://latex.codecogs.com/gif.latex?\inline&space;\eta">代表学习率，是一个需要手工设定的超参数。</p>
 <p>　　下面的代码定义了一个包含训练方法的感知机类型。</p>
-<pre><code>class Perceptron(object):
+<pre><code class="Python">from functools import reduce
+class Perceptron(object):
     def __init__(self, input_num, activator):
         &#39;&#39;&#39;
         初始化感知器，设置输入参数的个数，以及激活函数。
@@ -205,10 +206,10 @@ var _hmt = _hmt || [];
         # 把input_vec[x1,x2,x3...]和weights[w1,w2,w3,...]打包在一起
         # 变成[(x1,w1),(x2,w2),(x3,w3),...]
         # 然后利用map函数计算[x1*w1, x2*w2, x3*w3]
-        # 最后利用reduce求和
+        # 最后利用functools.reduce求和
         return self.activator(
             reduce(lambda a, b: a + b,
-                   map(lambda (x, w): x * w,  
+                   map(lambda x: x[0] * x[1],  
                        zip(input_vec, self.weights))
                 , 0.0) + self.bias)
     def train(self, input_vecs, labels, iteration, rate):
@@ -238,13 +239,15 @@ var _hmt = _hmt || [];
         # 变成[(x1,w1),(x2,w2),(x3,w3),...]
         # 然后利用感知器规则更新权重
         delta = label - output
-        self.weights = map(
-            lambda (x, w): w + rate * delta * x,
-            zip(input_vec, self.weights))
+        self.weights = list(map(
+            lambda x: x[1] + rate * delta * x[0],
+            zip(input_vec, self.weights)))
         # 更新bias
         self.bias += rate * delta
-</code></pre><p> 　　使用这个类来训练一个并函数</p>
-<pre><code>def f(x):
+</code></pre>
+<p> 　　使用这个类来训练一个并函数</p>
+<pre><code class="Python">
+def f(x):
     &#39;&#39;&#39;
     定义激活函数f
     &#39;&#39;&#39;
@@ -275,13 +278,14 @@ if __name__ == &#39;__main__&#39;:
     # 训练and感知器
     and_perception = train_and_perceptron()
     # 打印训练获得的权重
-    print and_perception
+    print (and_perception)
     # 测试
-    print &#39;1 and 1 = %d&#39; % and_perception.predict([1, 1])
-    print &#39;0 and 0 = %d&#39; % and_perception.predict([0, 0])
-    print &#39;1 and 0 = %d&#39; % and_perception.predict([1, 0])
-    print &#39;0 and 1 = %d&#39; % and_perception.predict([0, 1])
+    print (&#39;1 and 1 = %d&#39; % and_perception.predict([1, 1]))
+    print (&#39;0 and 0 = %d&#39; % and_perception.predict([0, 0]))
+    print (&#39;1 and 0 = %d&#39; % and_perception.predict([1, 0]))
+    print (&#39;0 and 1 = %d&#39; % and_perception.predict([0, 1]))
 </code></pre>
+
       
     </div>
     <footer class="article-footer">
